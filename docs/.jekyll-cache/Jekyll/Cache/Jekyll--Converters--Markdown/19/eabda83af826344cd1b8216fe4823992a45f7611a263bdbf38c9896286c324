@@ -1,0 +1,21 @@
+I"�<p>Tale is a minimal <a href="https://jekyllrb.com/">Jekyll</a> theme curated for storytellers. It is designed and developed by <a href="https://github.com/chesterhow/">myself</a> for a friend who writes short stories.</p>
+
+<h2 id="tale-features">Tale features</h2>
+<ul>
+  <li>Compatible with GitHub Pages</li>
+  <li>Responsive design (looks just as good on mobile)</li>
+  <li>Syntax highlighting, with the help of Pygments</li>
+  <li>Markdown and HTML text formatting</li>
+  <li>Pagination of posts</li>
+</ul>
+
+<p>Head over to the <a href="/tale/2017-03-16/example-content">Example Content</a> post for a showcase of Tale’s text formatting features.</p>
+
+<h2 id="browser-support">Browser Support</h2>
+<p>Tale works on most if not all modern browsers, including Chrome, Safari and Firefox 👍🏼</p>
+
+<h2 id="download-or-contribute">Download or Contribute</h2>
+<p>Tale is publicly hosted on GitHub, so go ahead and download or fork it at the <a href="https://github.com/chesterhow/tale">GitHub repository</a>. If you spot any bugs or have any suggestions, feel free to create an issue or make a pull request.</p>
+
+<p>Thanks for checking out Tale!</p>
+:ET
