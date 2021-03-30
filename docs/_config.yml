@@ -1,7 +1,7 @@
 # Site settings
 title:          Tale
 description:    "Minimal Jekyll theme for storytellers"
-baseurl:        "/us-post-offices/docs"
+baseurl:        "/us-post-offices"
 url:            "cblevins.github.io"
 
 # Google Analytics
