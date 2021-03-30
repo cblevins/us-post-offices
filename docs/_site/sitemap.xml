@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://localhost:4000/us-post-offices/404</loc>
+</url>
+<url>
+<loc>http://localhost:4000/us-post-offices/assignments/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/us-post-offices/chicago-1968/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/us-post-offices/election-unessay/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/us-post-offices/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/us-post-offices/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/us-post-offices/policies/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/us-post-offices/schedule/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/us-post-offices/weekend-briefing-1918/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/us-post-offices/us-post-offices-data-biography.html</loc>
+<lastmod>2021-03-30T12:12:32-06:00</lastmod>
+</url>
+</urlset>

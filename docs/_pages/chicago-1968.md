@@ -1,0 +1,32 @@
+---
+layout: page
+title: Chicago, 1918
+permalink: /chicago-1968/
+---
+<p></p>
+
+### Assignment Description
+
+*Chicago, 1968* is a historical simulation set during the Democratic National Convention in Chicago in August of 1968. Each student will be take on the role of a historical figure from this event as one of three groups: delegates, protestors, and journalists. **Delegates** need to choose a candidate to run against the incumbent President Richard Nixon in November. **Protestors** have assembled outside the city's convention center to make their demands heard. **Journalists** are tasked with covering events both inside the convention and on the streets. Each role has its own set of objectives, and students must use a variety of tactics to try and achieve those goals, from giving persuasive speeches to brokering political deals to getting a big news scoop. The simulation will take place over three full class periods in October, and will be conducted remotely via Zoom and Slack.  
+
+Why *Chicago, 1968*? The year 2020 has an uncanny resemblance to 1968. Today, an incumbent Republican president is facing an election year amidst a wave of protest, unrest, and division not seen since, well, the 1960s. What were the major issues, domestic and foreign, that animated politics during the 1960s? What were the points of discontent for the thousands of Americans who marched in protest? How was news media changing during this period and how did different journalists cover these events? This simulation will help students develop a more sophisticated understanding of this earlier era and think about the parallels and lessons for the present. 
+
+Why a historical simulation? *Chicago, 1968* is part of the larger [Reacting to the Past](https://reacting.barnard.edu/) curriculum, a multi-decade approach to teaching history through active learning and immersive engagement with historical moments and debates. Although simulations are based in particular places and times and involve particular historical events and figures, they are not an exercise in "reenacting" what happened. There are rules to the simulation that students must follow but there is no fixed script or predetermined outcome. Students lead the class sessions and, as a group, determine the outcome. By trying to inhabit the role of a historical figure, students will learn the core skill empathy by attempting to understand what the world of 1968 looked like through their eyes. Finally, and more specific to the context of a remote course during the Fall 2020 semester, a historical simulation will give students a different access point into the material and (hopefully) an engaging way to connect with their peers from a distance. 
+
+### Assignment Details
+
+The simulation will take place during three full class periods. A Set-Up Session will take place prior to the first full session that will provide an orientation for students about the details of the game, how it will proceed, and what they will be expected to do. Finally, there will be a Debrief Session in which students will learn the outcome of the simulation, what "actually happened," and have a chance to reflect on their experience.
+
+Students will be assigned a specific role based on their preferences and strengths, and be given a Role Sheet with biographical information and its objectives. Students will also receive a Gamebook that details the mechanics and schedule of the simulation, provides historical context, and contains a series of primary source texts that they will draw from to complete their assignments. Each type of role has a different set of expectations and assignments.
+
+- Delegates are responsible for deciding on the Democratic Party's plank (set of policy priorities) and nominating a candidate to run in the general election in November. In addition to participation during class sessions, delegates will be evaluated on a three-minute speech (with an accompanying outline) and a letter written at the conclusion of the final session assessing what they did during the convention. 
+- Protestors will be trying to influence the delegates to adopt certain policies as part of their plank and doing whatever they can to garner attention for their cause(s). In addition to participation during class sessions, protestors will be evaluated on a three-minute speech (with an accompanying outline) and a letter written at the conclusion of the last session assessing what they did during the convention. 
+- Journalists will be covering the course of the convention and the protests taking place outside by conducting interviews and writing/recording stories. Journalists will be evaluated on three stories that they file during the course of the simulation and its immediate aftermath. Journalists do not need to give a speech, making them roles that are better suited for students who prefer to act more as observers.
+
+See Gamebook for due dates for speeches, stories, and other written assignments.
+
+### Potential Problems and Pitfalls
+
+Historical simulations come with risks, and I want to be transparent about some of those challenges and what we will be doing to address them. First, there is the risk of trivializing major historical event and processes as a "game" and reducing real people to characters that students "play." Although the simulation can be exhilarating and even fun, students need to constantly remind themselves that these were real people dealing with real events that had real stakes at the time. Second, there is a lack of racial and gender diversity within the roles. This is a reflection of the political and social landscape of the 1960s in which white men overwhelmingly occupied positions of power in politics, social movements, and journalism. But this can be frustrating for women or students of color to have to take on these roles. We will be talking as a group about the best way to approach these issues with care, compassion, and respect. 
+
+However, any student who is uncomfortable with the simulation is not required to participate. You are welcome to join these sessions as an observer or to excuse yourself entirely from those three classes. If you elect to do so, I will provide you with readings and an alternative essay assignment to complete in place of the simulation. I encourage any student who has doubts or questions to reach out to me directly both before or during the simulation to discuss your concerns. 
