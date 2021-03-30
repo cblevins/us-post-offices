@@ -1,0 +1,6 @@
+Matching data for Round 2 of geolocating Helbock data with GNIS data. Processed on 2021-03-14 12:52:23
+Time: 37.265 sec elapsed
+Total number matched so far: 106009
+Total remaining to match: 60131
+Number matched this round: 2789
+Percentage matched this round: 1.67870470687372

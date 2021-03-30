@@ -1,0 +1,10 @@
+Matching data for Round 3 of geolocating Helbock data with GNIS data. Processed on 2021-03-15 08:37:29
+Using a minimum fuzzy match score: 0.75 (Levenshtein distance method).
+Time: 
+Number matched this round: 6512
+Percentage of all post offices matched this round: 3.92
+Number remaining to match after this round: 53619
+Percentage matched within this round: 10.8296885134124
+Overall number matched: 112521
+Overall remaining to match: 53619
+Percentage matched overall: 67.727
