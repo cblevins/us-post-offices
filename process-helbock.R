@@ -62,13 +62,17 @@ rm(helbock_data_original)
 ######### Processing GNIS file ############
 
 #read in GNIS download of features - this is a list of unique features, each with a unique ID
-gnis_full<-read_delim("data/NationalFile_20210101.txt", delim = "|",col_names = TRUE, escape_double = FALSE, trim_ws = TRUE, progress=TRUE) #escape_double is to handle quote marks within names (othewrwise gets messed up)
+
+## NOTE: this is only a sample file used for Github because the full file is too large. Replace this file with the full version: https://dataverse.harvard.edu/api/access/datafile/4491883
+gnis_full<-read_delim("data/NationalFile_20210101.txt", delim = "|",col_names = TRUE, escape_double = FALSE, trim_ws = TRUE, progress=TRUE)
 gnis_full<-as.data.frame(gnis_full)
 gnis_full<- gnis_full %>%
   rename(OldName=FEATURE_NAME, Feature.Class=FEATURE_CLASS, State=STATE_ALPHA, County=COUNTY_NAME, Latitude=PRIM_LAT_DEC, Longitude=PRIM_LONG_DEC)
 
-#taking in the full name list (includes ALTERNATE names for features) - this is a list of all names, including altnerate names for the same feature
-  #then joining it with the GNIS data (lat, long, etc.) to create a big dataframe, with repeated FEATURE ID's in them)
+#Taking in the full name list (includes ALTERNATE names for features) - this is a list of all names, including altnerate names for the same feature
+#then joining it with the GNIS data (lat, long, etc.) to create a big dataframe, with repeated FEATURE ID's in them)
+
+## NOTE: this is only a sample file used for Github because the full file is too large. Replace this file with the full version: https://dataverse.harvard.edu/api/access/datafile/4491882
 all_gnisnames_original<-read_delim(file="data/AllNames_20210101_nocitation.txt", delim = "|", col_names = TRUE, escape_double = FALSE, trim_ws = TRUE, progress=TRUE) #escape_double is to handle quote marks within names (othewrwise gets messed up)
 all_gnisnames_original<-as.data.frame(all_gnisnames_original)
 #only select first two columns of data, clean up, and join it to the main GNIS dataframe

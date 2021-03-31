@@ -6,7 +6,6 @@ library(tidyverse)
 library(data.table)
 
 # Load in Helbock's Post Offices that have been geolocated
-#postoffices_original<-read.csv("output/USPO_March2021.csv", stringsAsFactors = FALSE)
 postoffices_original<-read.csv("output/us-post-offices.csv", stringsAsFactors = FALSE)
 postoffices<-postoffices_original
 postoffices$Established<-as.integer(as.character(postoffices$Established)) #convert years to integers
@@ -64,5 +63,4 @@ postoffices_randomcoords<-postoffices %>%
   
 
 #output the file with random coordinates
-#write.csv(postoffices_randomcoords, "output/USPO_March2021_RandomCoords.csv", row.names=F, na="")
 write.csv(postoffices_randomcoords, "output/us-post-offices-random-coords.csv", row.names=F, na="")
