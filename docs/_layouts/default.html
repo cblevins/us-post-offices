@@ -11,7 +11,7 @@
 
     <meta name="theme-color" content="#000000">
     <!---<link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon-32x32.png">--->
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/thirty-eight-star-u.s.-flag-small.jpg">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/images/favicon.ico">
   </head>
 
   <body>
@@ -24,14 +24,15 @@
 
             <div class="site-info">
               <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-              <p class="site-description">{{ site.description }}</p> 
+              <p class="site-description">{{ site.description }}</p>
             </div>
 
             <nav>
-              <a href="{{ site.baseurl }}/">About this Course</a>
-              <a href="{{ site.baseurl }}/schedule">Schedule</a>
-              <a href="{{ site.baseurl }}/assignments">Assignments</a>
-              <a href="{{ site.baseurl }}/policies">Policies</a>
+              <a href="{{ site.baseurl }}/">About</a>
+              <a href="{{ site.baseurl }}/data-biography">Data Biography</a>
+              <a href="{{ site.baseurl }}/data-processing">Data Processing</a>
+              <a href="https://github.com/cblevins/us-post-offices/">Github</a>
+              <a href="https://doi.org/10.7910/DVN/NUKCNA">Download the Data</a>
             </nav>
           </header>
         </div>
@@ -46,8 +47,8 @@
       <div class="wrapper-footer">
         <div class="container">
           <footer class="footer">
-            <!--{% include svg-icons.html %}-->
-            <a href="http://cameronblevins.org">Cameron Blevins</a>, (University of Colorado Denver, Fall 2020)
+            {% include svg-icons.html %}
+            <!--<a href="https://cameronblevins.org">Cameron Blevins</a>, US Post Offices-->
           </footer>
         </div>
       </div>

@@ -3,24 +3,16 @@
 #
 
 # Name of your site (displayed in the header)
-name: U.S. History Since 1876
-university: "University of Colorado Denver"
-course_number: "HIST 1362"
-semester: "Fall 2020"
-room: "placeholder"
-meetingtime: "Mon/Wed 9:30-10:45"
-instructor: Cameron Blevins
-email: cameron.blevins@ucdenver.edu
-office: "N/A"
+name: US Post Offices
 
 # Name of the author
 author: Cameron Blevins
 
 # Short bio or description (displayed in the header)
-description: University of Colorado Denver, Fall 2020
+description: By Cameron Blevins & Richard W. Helbock
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: /images/thirty-eight-star-u.s.-flag.jpg
+avatar: /images/usa-all-records-medium.png
 
 #
 # Flags below are optional
@@ -30,14 +22,14 @@ avatar: /images/thirty-eight-star-u.s.-flag.jpg
 footer-links:
   dribbble:
   email: cameron.blevins@ucdenver.edu
-  facebook:
+  facebook: 
   flickr:
-  github: 
+  github: cblevins/us-post-offices
   instagram:
   linkedin: 
   pinterest:
   rss: 
-  twitter:
+  twitter: historying
   stackoverflow: 
   youtube: # channel/<your_long_string> or user/<user-name>
   googleplus: # anything in your profile username that comes after plus.google.com/

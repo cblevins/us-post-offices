@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Processing Richard Helbock's Dataset – US Post Offices – By Cameron Blevins & Richard W. Helbock</title>
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Processing Richard Helbock’s Dataset | US Post Offices</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Processing Richard Helbock’s Dataset" />
+<meta name="author" content="Cameron Blevins" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="By Cameron Blevins &amp; Richard W. Helbock" />
+<meta property="og:description" content="By Cameron Blevins &amp; Richard W. Helbock" />
+<link rel="canonical" href="http://localhost:4000/us-post-offices/data-processing/" />
+<meta property="og:url" content="http://localhost:4000/us-post-offices/data-processing/" />
+<meta property="og:site_name" content="US Post Offices" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Processing Richard Helbock’s Dataset" />
+<script type="application/ld+json">
+{"description":"By Cameron Blevins &amp; Richard W. Helbock","author":{"@type":"Person","name":"Cameron Blevins"},"@type":"WebPage","url":"http://localhost:4000/us-post-offices/data-processing/","headline":"Processing Richard Helbock’s Dataset","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="By Cameron Blevins & Richard W. Helbock">
+    <meta property="og:description" content="By Cameron Blevins & Richard W. Helbock" />
+    
+    <meta name="author" content="US Post Offices" />
+
+    
+    <meta property="og:title" content="Processing Richard Helbock's Dataset" />
+    <meta property="twitter:title" content="Processing Richard Helbock's Dataset" />
+    
+
+    
+    <meta property="og:image" content="http://localhost:4000/images/usa-all-records-medium.png"/>
+    <meta property="twitter:image" content="http://localhost:4000/images/usa-all-records-medium.png"/>
+    
+    <meta property="og:site_name" content="Amit Merchant - Software Engineer"/>
+
+
+    <link rel="stylesheet" type="text/css" href="/us-post-offices/assets/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="US Post Offices - By Cameron Blevins & Richard W. Helbock" href="/us-post-offices/feed.xml" />
+    <link rel="canonical" href="http://localhost:4000/data-processing/" />
+
+    <meta name="theme-color" content="#000000">
+    <!---<link rel="icon" type="image/png" sizes="32x32" href="/us-post-offices/images/favicon-32x32.png">--->
+    <link rel="icon" type="image/png" sizes="32x32" href="/us-post-offices/images/favicon.ico">
+  </head>
+
+  <body>
+    <div id="bar"></div>
+    <div class="wrapper-container">
+      <div class="wrapper-masthead">
+        <div class="container">
+          <header class="masthead clearfix">
+            <a href="/us-post-offices/" class="site-avatar"><img src="/us-post-offices/images/usa-all-records-medium.png" /></a>
+
+            <div class="site-info">
+              <h1 class="site-name"><a href="/us-post-offices/">US Post Offices</a></h1>
+              <p class="site-description">By Cameron Blevins & Richard W. Helbock</p>
+            </div>
+
+            <nav>
+              <a href="/us-post-offices/">About</a>
+              <a href="/us-post-offices/data-biography">Data Biography</a>
+              <a href="/us-post-offices/data-processing">Data Processing</a>
+              <a href="https://github.com/cblevins/us-post-offices/">Github</a>
+              <a href="https://doi.org/10.7910/DVN/NUKCNA">Download the Data</a>
+            </nav>
+          </header>
+        </div>
+      </div>
+
+      <div class="wrapper-main">
+        <div id="main" role="main" class="container">
+          <article class="page">
+
+  <h1>Processing Richard Helbock's Dataset</h1>
+
+  <div class="entry">
+    <h2 id="introduction">Introduction</h2>
+
+<p>The following provides documentation for how I processed Richard Helbock’s original dataset to create <code class="language-plaintext highlighter-rouge">US Post Offices</code>. The goal of this processing was to geocode, or find geographical coordinates, for as many records as possible. This took place in two stages: a) using the <a href="https://www.usgs.gov/core-science-systems/ngp/board-on-geographic-names/domestic-names">Geographic Names Information System (GNIS) Domestic Names</a> database as a historical gazetteer to geocode a majority of post offices, and b) assigning semi-random location coordinates to the remaining post offices based on the county in which they operated.</p>
+
+<h4 id="project-directory-files">Project Directory Files</h4>
+
+<p>These are the main project directory:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">process-helbock.r</code>: R file for geocoding Helbock’s data using the GNIS database approach.</li>
+  <li><code class="language-plaintext highlighter-rouge">assign-random-coordinates.r</code>: R file used for assigning semi-random coordinates to any post offices that were not geocoded using the GNIS database approach.</li>
+  <li><code class="language-plaintext highlighter-rouge">us-post-offices-data-dictionary.csv</code>: Detailed explanations for each of the fields in <code class="language-plaintext highlighter-rouge">us-post-offices.csv</code> and <code class="language-plaintext highlighter-rouge">us-post-offices-random-coords.csv</code>.</li>
+</ul>
+
+<h4 id="source-files">Source Files</h4>
+
+<p>The main files I used for the processing Helbock’s data can be found in the <code class="language-plaintext highlighter-rouge">data</code> folder:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Complete_USPO.mdb</code>: Original database of post office records compiled by Richard Helbock.</li>
+  <li><code class="language-plaintext highlighter-rouge">NationalFile_20210101.txt</code>: Tabular data containing all official domestic GNIS features for the United States, downloaded in March 2021.</li>
+  <li><code class="language-plaintext highlighter-rouge">AllNames_20210101_nocitation.txt</code>: Tabular data containing variant names for GNIS domestic features, downloaded in March 2021. Note: this file has been modified from the original downloaded GNIS file in order to reduce its size. I lopped off the last two columns (a lot of citation text) using the shell command: <code class="language-plaintext highlighter-rouge">cut -d '|' -f 1-3,5 AllNames_20210101.txt &gt; AllNames_20210101_nocitation.txt</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">random-coordinates-150-per-county.csv</code>: Tabular data of coordinates for points that were randomly distributed within every US county using QGIS’s Random Points Inside Polygons tool.</li>
+</ul>
+
+<h4 id="analytics-files">Analytics Files</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">analytics</code> folder contains files that were generated during each phase of the geocoding process. They capture information about how many records were successfully matched during each round, along with temporary data files that can be used as placeholders to back up data between matching rounds.</p>
+
+<h4 id="output-files">Output Files</h4>
+
+<p>The files generated by processing Helbock’s data can be found in the <code class="language-plaintext highlighter-rouge">output</code> folder:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">us-post-offices.csv</code>: The main tabular dataset generated from geocoding Helbock’s data using the GNIS database. <em>Note: this file contains many records with missing geographical coordinates. See below and the <a href="/us-post-offices/data-biography">US Post Offices Data Biography</a> for more details.</em></li>
+  <li><code class="language-plaintext highlighter-rouge">us-post-offices-random-coords.csv</code>: Alternative dataset to <code class="language-plaintext highlighter-rouge">us-post-offices.csv</code> containing semi-random coordinates assigned to any post offices that were not successfully geolocated using the GNIS database. <em>Note: See below and the <a href="/us-post-offices/data-biography">US Post Offices Data Biography</a> for more details before using this dataset.</em></li>
+  <li><code class="language-plaintext highlighter-rouge">fulldata_[somedate].csv</code>: Any files with this naming convention were generated during the geocoding process to serve as a temporary holding file before generating the final dataset.</li>
+  <li><code class="language-plaintext highlighter-rouge">matched_[somedate].csv</code>: Any files with this naming convention were generated during the geocoding process to serve as a temporary holding file for successfully geolocated post offices before generating the final dataset.</li>
+</ul>
+
+<h2 id="data-processing-steps-gnis-geocoding">Data Processing Steps: GNIS Geocoding</h2>
+
+<h3 id="overview-of-matching-process">Overview of Matching Process</h3>
+
+<p>I used a historical gazetteer approach with the <a href="https://www.usgs.gov/core-science-systems/ngp/board-on-geographic-names/domestic-names">Geographic Names Information System (GNIS) Domestic Names</a> collected by the U.S. Board on Geographic Names under the U.S. Geological Survey. This dataset includes several million named features from the United States, categorized into Feature Classes (<a href="https://geonames.usgs.gov/apex/f?p=gnispq:8:0:::::">defined here</a>). The script for geocoding using the GNIS database can be found in <code class="language-plaintext highlighter-rouge">helbock-processing.r</code></p>
+
+<p>The basic approach was to look for matches between post offices in Helbock’s dataset that have the same Name, State, and County as a feature in the GNIS database. Some post offices have multiple counties listed, so I needed to check multiple combinations of Name + State + County. I used a hierarchy of GNIS features that acted as a sequential series of filters to pass post office records through, taking the first full match and removing that post office from the list of remaining records to try and match. This was based on descending likelihood that a particular kind of GNIS feature would be the correct match for a post office (versus a false positive match). The order was determined through an examination of the <a href="https://geonames.usgs.gov/apex/f?p=gnispq:8:0:::::">GNIS Feature Classes</a> and through trial and error.</p>
+
+<ol>
+  <li>Post Office</li>
+  <li>Populated Place</li>
+  <li>Locale</li>
+  <li>Mine</li>
+  <li>Cemetery</li>
+  <li>School</li>
+  <li>Military</li>
+  <li>Cape</li>
+  <li>Civil</li>
+  <li>Church</li>
+  <li>Census</li>
+</ol>
+
+<p>The geocoding process took place in three phases, with each phase casting a wider net of potential matches (and therefore having a higher chance of false positive matches). Phase 1 looked for an exact match between Helbock’s post office name and the names of GNIS features. Phase 2 tweaked some of the GNIS feature names within each feature class to cast a wider net of potential matches. Phase 3 used “fuzzy matching” to try and find matches between post office names and GNIS features names, even if they were spelled slightly differently.</p>
+
+<h3 id="prepping-the-data">Prepping the Data</h3>
+
+<ol>
+  <li>Read in Helbock’s Dataset and do some basic cleaning (whitespace, spelling variations, adding alternative names to look up, etc.)</li>
+  <li>Read in the GNIS National file - name, state, county, coordinates, etc. for features.</li>
+  <li>Read in the GNIS AllNames file - contains variants on names for the same GNIS feature</li>
+  <li>Join the National and AllNames dataframes so that each record contains option to match multiple names</li>
+  <li>Clean up the joined GNIS dataframe to make it easier to find matches (ex. deleting “ELEMENTARY SCHOOL” from a feature name) and remove any GNIS records that have unknown geographical coordinates.</li>
+  <li>Do a basic comparison of unique values across the two datasets and then manually clean up some of these discrepancies, especially counties that are spelled differently by Helbock vs. GNIS.</li>
+</ol>
+
+<h4 id="phase-1-full-matching">Phase 1: Full Matching</h4>
+
+<p>Phase 1 tried to find “strict” matches between Helbock’s post offices and GNIS features - ie. an identical Name, County, and State.</p>
+
+<p>I defined a series of functions to ingest a post office Name, County, and State and try to match all three of those fields in the GNIS database. Note that Alaska is a separate function that matches only two fields (Name and State) because there were no Alaska counties in Helbock’s dataset. An individual post office runs through these functions four times, passing in alternate post office names and any post offices that have multiple counties.</p>
+
+<p>I created a running dataframe of post offices that have not yet been matched. Within each GNIS feature class (ex. Post Office, Populated Place, etc.), I pass the post office dataframe and the GNIS dataframe for that feature into my set of matching functions. Any post offices that are matched are removed from the dataframe of post offices remaining to be matched. This is then repeated for set of GNIS feature class. At the end of Phase 1 I had a subset of Helbock’s post offices that had full matches - ie. the Name, State, and County were matched with a GNIS record and assigned coordinates from the GNIS dataset.</p>
+
+<p>On March 14, 2021, Phase 1 found <strong>103,220 matches</strong>, or <strong>62.13%</strong> of the post offices in Helbock’s dataset.</p>
+
+<h4 id="phase-2-targeted-matching">Phase 2: Targeted Matching</h4>
+
+<p>Phase 2 took a more tailored approach by altering the name field of specific GNIS Feature Class. For instance, many Populated Place feature classes have a Name field that starts with “Township of ____”. Phase 2 removes the string “Township of “ from all Populated Place GNIS features and then tries to match Helbock’s remaining unmatched post offices with these cleaned up Populated Place features. It does similar string modifications for other GNIS feature classes. The reason I didn’t do this in Round 1 is because I don’t want to accidentally miss matches, just in case the full name in Helbock’s dataset might match the longer original Name field in the GNIS dataset. Once again, if a match is found for a post office, it is removed from the running list of post offices that need matches.</p>
+
+<p>On March 14, 2021, Phase 2 found <strong>2,789 matches</strong>, or <strong>1.68%</strong> of the total post offices in Helbock’s dataset.</p>
+
+<h4 id="phase-3-fuzzy-matching">Phase 3: Fuzzy Matching</h4>
+
+<p>Phase 3 takes any remaining post offices and tries to use “fuzzy matching” to look for inexact matches across post offices Names and GNIS Names. I defined a function that used the <a href="https://cran.r-project.org/web/packages/fuzzyjoin/">fuzzyjoin package in R</a> and selected the Levenshtein distance method within this package. <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance</a> calculates “the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other.” This generates a score from 0-1 representing the relative “string distance” between the two names - essentially, how close is one string to the other based on the number of changes as a percentage. A string distance of 1 would be a full match requiring zero changes, while a string distance of 0.5 would require you to make changes equal to half the number of its total characters. I used a <strong>threshold of 0.75</strong> for this string distance score, meaning that the program would disregard any matches that fell below that score. I also put in a trigger that does not try to fuzzy match any names that are 4 characters or less, which would run a higher risk of false positives. Note: this phase is by far the most computationally greedy phase and takes many hours to run.</p>
+
+<p>For instance, one post office in Helbock dataset in Leavenworth County, Kansas, is named <code class="language-plaintext highlighter-rouge">STRINGER</code>. There was no exact match for this in the GNIS dataset, but the fuzzyjoin package found a fuzzy match with the GNIS Populated Place in Leavenworth County, Kansas, named <code class="language-plaintext highlighter-rouge">STRANGER</code>. The Levenshthein distance between <code class="language-plaintext highlighter-rouge">STRINGER</code> and <code class="language-plaintext highlighter-rouge">STRANGER</code> is <strong>0.875</strong>: <code class="language-plaintext highlighter-rouge">1 single-character edit</code> (changing <code class="language-plaintext highlighter-rouge">I</code> to <code class="language-plaintext highlighter-rouge">A</code>), divided by <code class="language-plaintext highlighter-rouge">8 total characters</code> in the string <code class="language-plaintext highlighter-rouge">STRINGER</code> = <code class="language-plaintext highlighter-rouge">0.125</code>, or a string distance score of <code class="language-plaintext highlighter-rouge">0.875</code> (above my threshold score of 0.75).</p>
+
+<p>On March 15, 2021, Phase 3 found <strong>6,512 matches</strong>, or <strong>3.92%</strong> of the total post offices in Helbock’s dataset.</p>
+
+<h3 id="gnis-geocoding-results">GNIS Geocoding Results</h3>
+
+<p>Combined, these three phases found <strong>112,521 matches</strong>, or <strong>67.72%</strong> of the total post offices in Helbock’s dataset. This left <strong>53,619</strong> post offices that were not successfully geocoded through the GNIS database, or <strong>32.28%</strong> of the total post offices in Helbock’s dataset. The final data for all post offices, both successfully and unsuccessfully geolocated, was written to: <code class="language-plaintext highlighter-rouge">us-post-offices.csv</code>.</p>
+
+<p>Read the <a href="/us-post-offices/data-biography">US Post Offices Data Biography</a>  for a discussion of the results and things to keep in mind when using this dataset.</p>
+
+<h2 id="data-processing-steps-assigning-semi-random-coordinates">Data Processing Steps: Assigning Semi-Random Coordinates</h2>
+
+<p>I also created an alternative dataset: <code class="language-plaintext highlighter-rouge">us-post-offices-random-coords.csv</code>. In this dataset, I assigned semi-random location coordinates to the post office records that were <em>not</em> successfully geocoded through the GNIS database. My starting point for this process was that Richard Helbock had collected information about each post office’s county and state. This information provides a geographical boundary within which we know the post office was located (even if we don’t know precisely where). The process for assigning random coordinates to post offices was completed in two steps.</p>
+
+<p>In Step 1, I used the geospatial software QGIS to import a shapefile of US county boundaries for the year 2000 (from the Newberry Library’s Atlas of Historical County Boundaries). The reason for selecting this year was that Helbock did not attempt to record historical counties for each post office, but rather recorded the county in which they were located when he was making his dataset. In this case, most of his work was published between 2000-207, so I decided to use the year 2000 for county boundaries. I then used QGIS’s <code class="language-plaintext highlighter-rouge">Random Points Inside Polygons</code> tool to generate 150 points that were randomly distributed inside every county in the United States. I exported these as <code class="language-plaintext highlighter-rouge">random-coordinates-150-per-county.csv</code>.</p>
+
+<p>Step 2 was completed through <code class="language-plaintext highlighter-rouge">assign-random-coordinates.R</code>. The basic process involved importing <code class="language-plaintext highlighter-rouge">us-post-offices.csv</code> and <code class="language-plaintext highlighter-rouge">random-coordinates-150-per-county.csv</code>, and then joining post office records that had not been geocoded through the GNIS matching to random points from the corresponding county that had been generated in QGIS (using the unique state and county combination as a key to join them).</p>
+
+<p>Read the <a href="/us-post-offices/data-biography">US Post Offices Data Biography</a> for a discussion of the results and things to keep in mind when using this dataset.</p>
+
+  </div>
+</article>
+
+        </div>
+      </div>
+
+      <div class="wrapper-footer">
+        <div class="container">
+          <footer class="footer">
+            
+<a href="mailto:cameron.blevins@ucdenver.edu"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/cblevins"><i class="svg-icon github"></i></a>
+
+
+
+
+<a href="https://www.twitter.com/historying"><i class="svg-icon twitter"></i></a>
+
+
+
+
+
+            <!--<a href="https://cameronblevins.org">Cameron Blevins</a>, US Post Offices-->
+          </footer>
+        </div>
+      </div>
+    </div>
+    
+
+  </body>
+</html>
