@@ -2,29 +2,32 @@
 
 ## Cameron Blevins (March 2021)
 
-This repository contains the code used to create [US Post Offices](http://cblevins.github.io/us-post-offices/). Its goal was to geocode, or find geographical coordinates, for as many records from Richard Helbock's dataset of historical post offices as possible. This took place in two stages: a) using the [Geographic Names Information System (GNIS) Domestic Names](https://www.usgs.gov/core-science-systems/ngp/board-on-geographic-names/domestic-names) database as a historical gazetteer to geocode a majority of post offices, and b) assigning semi-random location coordinates to the remaining post offices based on the county in which they operated.
+This repository contains the code used to create the [US Post Offices](http://cblevins.github.io/us-post-offices/) dataset. Its goal was to geocode, or find geographical coordinates, for as many records from Richard Helbock's dataset of historical post offices as possible. This took place in two stages: a) using the [Geographic Names Information System (GNIS) Domestic Names](https://www.usgs.gov/core-science-systems/ngp/board-on-geographic-names/domestic-names) database as a historical gazetteer to geocode a majority of post offices, and b) assigning semi-random location coordinates to the remaining post offices based on the county in which they operated.
 
-#### Main Project Directory Files
+### Files and Folders
+
+#### Main Project Files:
 
 - `process-helbock.r`: R file for geocoding Helbock's data using the GNIS database approach.
 - `assign-random-coordinates.r`: R file used for assigning semi-random coordinates to any post offices that were not geocoded using the GNIS database approach.
 - `us-post-offices-data-dictionary.csv`: Detailed explanations for each of the fields in `us-post-offices.csv` and `us-post-offices-random-coords.csv`.
+- The `/docs/` folder contains a [Github Pages](https://cblevins.github.io/us-post-offices) site with more information about the dataset.
 
-#### Files in `data` folder
+#### Files in `data` folder:
 
 - `Complete_USPO.mdb`: Original database of post office records compiled by Richard Helbock.
-- `NationalFile_20210101.txt`: Sample of tabular data containing all official domestic GNIS features for the United States, downloaded in March 2021.
+- `NationalFile_20210101.txt`: Tabular data containing all official domestic GNIS features for the United States, downloaded in March 2021.
   - Note: This was too large a file to host on Github, so I'm only providing the first 100,000 rows from this file. [Download the full file here](https://dataverse.harvard.edu/api/access/datafile/4491883) and replace the current file.
 - `AllNames_20210101_nocitation.txt`: Tabular data containing variant names for GNIS domestic features, downloaded in March 2021.
   - This file has been modified from the original downloaded GNIS file in order to reduce its size. I lopped off the last two columns (a lot of citation text) using the shell command: `cut -d '|' -f 1-3,5 AllNames_20210101.txt > AllNames_20210101_nocitation.txt`.  
   - Note: This was too large a file to host on Github, so I'm only providing the first 100,000 rows from this file. [Download the full file here](https://dataverse.harvard.edu/api/access/datafile/4491882) and replace the current version of the file.
   - `random-coordinates-150-per-county.csv`: Tabular data of coordinates for points that were randomly distributed within every US county using QGIS's Random Points Inside Polygons tool.
 
-#### Files in `analytics` folder
+#### Files in `analytics` folder:
 
 The `analytics` folder contains files that were generated during each phase of the geocoding process. They capture information about how many records were successfully matched during each round, along with temporary data files that can be used as placeholders to back up data between matching rounds.
 
-#### Files in `output` folder
+#### Files in `output` folder:
 
 - **`us-post-offices.csv`:** The main tabular dataset generated from geocoding Helbock's data using the GNIS database. *Note: this file contains many records with missing geographical coordinates. See below and the [US Post Offices Data Biography](https://cblevins.github.io/us-post-offices/data-biography) before using this data.*
 - **`us-post-offices-random-coords.csv`**: Alternative dataset to `us-post-offices.csv` containing semi-random coordinates assigned to any post offices that were not successfully geolocated using the GNIS database. *Note: See below and the [US Post Offices Data Biography](https://cblevins.github.io/us-post-offices/data-biography) for more details before using this data.*

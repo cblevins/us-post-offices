@@ -16,6 +16,7 @@ title: US Post Offices
   - Cameron Blevins, *[Paper Trails: The US Post and the Making of the American West](https://global.oup.com/academic/product/paper-trails-9780190053673)* (New York: Oxford University Press, 2021).
   - Cameron Blevins, Yan Wu, and Steven Braun, ["Gossamer Network"](https://gossamernetwork.com/) (2021).
 
+
 ### Credits
 
 - **Richard W. Helbock** (1938-2011) conducted the archival research to compile information about historical post offices. 
@@ -23,5 +24,4 @@ title: US Post Offices
 
 ### How to cite this dataset
 
-Cameron Blevins and Richard W. Helbock , "US Post Offices" (2021), Harvard Dataverse, <https://doi.org/10.7910/DVN/NUKCNA>. 
-
+<script src="https://dataverse.harvard.edu/resources/js/widgets.js?persistentId=doi:10.7910/DVN/NUKCNA&amp;dvUrl=https://dataverse.harvard.edu&amp;widget=citation&amp;heightPx=150"></script>
