@@ -2,12 +2,14 @@
 
 ## Cameron Blevins (March 2021)
 
-This repository contains the code used to create the [US Post Offices](http://cblevins.github.io/us-post-offices/) dataset. Its goal was to geocode, or find geographical coordinates, for as many records from Richard Helbock's dataset of historical post offices as possible. This took place in two stages: a) using the [Geographic Names Information System (GNIS) Domestic Names](https://www.usgs.gov/core-science-systems/ngp/board-on-geographic-names/domestic-names) database as a historical gazetteer to geocode a majority of post offices, and b) assigning semi-random location coordinates to the remaining post offices based on the county in which they operated.
+This repository contains the code used by Cameron Blevins to create the [US Post Offices dataset](https://cblevins.github.io/us-post-offices/), which contains records about 166,140 post offices that operated in the United States between 1639-2000. Richard Helbock (1938-2011) conducted archival research to compile historical information about these post offices. The code in this repository was written by Blevins in order to geocode, or find geographical coordinates, for as many records from Helbock's dataset as possible. The following README file describes this geocoding process. It took place in two successive stages: a) using the [Geographic Names Information System (GNIS) Domestic Names](https://www.usgs.gov/core-science-systems/ngp/board-on-geographic-names/domestic-names) database as a historical gazetteer to geocode a majority of post offices, and b) assigning semi-random location coordinates to the remaining post offices based on the county in which they operated. Refer to the [US Post Offices Data Biography](https://cblevins.github.io/us-post-offices/data-biography) for a discussion of the resulting dataset. 
 
 ### Files and Folders
 
 #### Main Project Files:
 
+- **`us-post-offices.csv`:** The main tabular dataset generated from geocoding Helbock's data using the GNIS database. *Note: this file contains many records with missing geographical coordinates. Refer to documentation below and the [US Post Offices Data Biography](https://cblevins.github.io/us-post-offices/data-biography) before using this data.*
+- **`us-post-offices-random-coords.csv`**: Alternative dataset to `us-post-offices.csv` containing semi-random coordinates assigned to any post offices that were not successfully geolocated using the GNIS database. *Note: Refer to documentation below and the [US Post Offices Data Biography](https://cblevins.github.io/us-post-offices/data-biography) for more details before using this data.*
 - `process-helbock.r`: R file for geocoding Helbock's data using the GNIS database approach.
 - `assign-random-coordinates.r`: R file used for assigning semi-random coordinates to any post offices that were not geocoded using the GNIS database approach.
 - `us-post-offices-data-dictionary.csv`: Detailed explanations for each of the fields in `us-post-offices.csv` and `us-post-offices-random-coords.csv`.
@@ -15,13 +17,13 @@ This repository contains the code used to create the [US Post Offices](http://cb
 
 #### Files in `data` folder:
 
-- `Complete_USPO.mdb`: Original database of post office records compiled by Richard Helbock.
+- `Complete_USPO.mdb`: Original Microsoft Access database of post office records compiled by Richard Helbock.
 - `NationalFile_20210101.txt`: Tabular data containing all official domestic GNIS features for the United States, downloaded in March 2021.
-  - Note: This was too large a file to host on Github, so I'm only providing the first 100,000 rows from this file. [Download the full file here](https://dataverse.harvard.edu/api/access/datafile/4491883) and replace the current file.
+  - This was too large a file to host on Github, so I'm only providing the first 100,000 rows from this file for testing and replication purposes. If you want to run the geocoding process using a full file, replace this file with [a full updated version from GNIS](https://geonames.usgs.gov/docs/stategaz/NationalFile.zip) or [the original file I used from Harvard Dataverse](https://doi.org/10.7910/DVN/NUKCNA)
 - `AllNames_20210101_nocitation.txt`: Tabular data containing variant names for GNIS domestic features, downloaded in March 2021.
-  - This file has been modified from the original downloaded GNIS file in order to reduce its size. I lopped off the last two columns (a lot of citation text) using the shell command: `cut -d '|' -f 1-3,5 AllNames_20210101.txt > AllNames_20210101_nocitation.txt`.  
-  - Note: This was too large a file to host on Github, so I'm only providing the first 100,000 rows from this file. [Download the full file here](https://dataverse.harvard.edu/api/access/datafile/4491882) and replace the current version of the file.
-  - `random-coordinates-150-per-county.csv`: Tabular data of coordinates for points that were randomly distributed within every US county using QGIS's Random Points Inside Polygons tool.
+  - This was too large a file to host on Github, so I'm only providing the first 100,000 rows from this file for testing and replication purposes. If you want to run the geocoding process using a full file, replace this file with [a full updated version from GNIS](https://geonames.usgs.gov/docs/stategaz/AllNames.zip) or [the original file I used from Harvard Dataverse](https://doi.org/10.7910/DVN/NUKCNA).
+  - If you are using an updated version from GNIS, note that the last two columns include a lot of citation text that makes it quite large. To reduce its size, I lopped off the last two columns using the shell command: `cut -d '|' -f 1-3,5 AllNames_20210101.txt > AllNames_20210101_nocitation.txt`.   
+- `random-coordinates-150-per-county.csv`: Tabular data of coordinates for points that were randomly distributed within every US county using QGIS's Random Points Inside Polygons tool.
 
 #### Files in `analytics` folder:
 
@@ -29,8 +31,6 @@ The `analytics` folder contains files that were generated during each phase of t
 
 #### Files in `output` folder:
 
-- **`us-post-offices.csv`:** The main tabular dataset generated from geocoding Helbock's data using the GNIS database. *Note: this file contains many records with missing geographical coordinates. See below and the [US Post Offices Data Biography](https://cblevins.github.io/us-post-offices/data-biography) before using this data.*
-- **`us-post-offices-random-coords.csv`**: Alternative dataset to `us-post-offices.csv` containing semi-random coordinates assigned to any post offices that were not successfully geolocated using the GNIS database. *Note: See below and the [US Post Offices Data Biography](https://cblevins.github.io/us-post-offices/data-biography) for more details before using this data.*
 - `fulldata_[somedate].csv`: Any files with this naming convention were generated during the geocoding process to serve as a temporary holding file before generating the final dataset.
 - `matched_[somedate].csv`: Any files with this naming convention were generated during the geocoding process to serve as a temporary holding file for successfully geolocated post offices before generating the final dataset.
 
@@ -38,7 +38,7 @@ The `analytics` folder contains files that were generated during each phase of t
 
 ### Overview of Matching Process
 
-I used a historical gazetteer approach with the [Geographic Names Information System (GNIS) Domestic Names](https://www.usgs.gov/core-science-systems/ngp/board-on-geographic-names/domestic-names) collected by the U.S. Board on Geographic Names under the U.S. Geological Survey. This dataset includes several million named features from the United States, categorized into Feature Classes ([defined here](https://geonames.usgs.gov/apex/f?p=gnispq:8:0:::::)). The script for geocoding using the GNIS database can be found in `helbock-processing.r` 
+I used a historical gazetteer approach with the [Geographic Names Information System (GNIS) Domestic Names](https://www.usgs.gov/core-science-systems/ngp/board-on-geographic-names/domestic-names) collected by the U.S. Board on Geographic Names under the U.S. Geological Survey. This dataset includes several million named features from the United States, categorized into Feature Classes ([defined here](https://geonames.usgs.gov/apex/f?p=gnispq:8:0:::::)). The script for geocoding using the GNIS database can be found in `process-helbock.R`. 
 
 The basic approach was to look for matches between post offices in Helbock's dataset that have the same Name, State, and County as a feature in the GNIS database. Some post offices have multiple counties listed, so I needed to check multiple combinations of Name + State + County. I used a hierarchy of GNIS features that acted as a sequential series of filters to pass post office records through, taking the first full match and removing that post office from the list of remaining records to try and match. This was based on descending likelihood that a particular kind of GNIS feature would be the correct match for a post office (versus a false positive match). The order was determined through an examination of the [GNIS Feature Classes](https://geonames.usgs.gov/apex/f?p=gnispq:8:0:::::) and through trial and error.
 
@@ -99,8 +99,19 @@ Read the [US Post Offices Data Biography](https://cblevins.github.io/us-post-off
 
 I also created an alternative dataset: `us-post-offices-random-coords.csv`. In this dataset, I assigned semi-random location coordinates to the post office records that were *not* successfully geocoded through the GNIS database. My starting point for this process was that Richard Helbock had collected information about each post office's county and state. This information provides a geographical boundary within which we know the post office was located (even if we don't know precisely where). The process for assigning random coordinates to post offices was completed in two steps.
 
-In Step 1, I used the geospatial software QGIS to import a shapefile of US county boundaries for the year 2000 (from the Newberry Library's Atlas of Historical County Boundaries). The reason for selecting this year was that Helbock did not attempt to record historical counties for each post office, but rather recorded the county in which they were located when he was making his dataset. In this case, most of his work was published between 2000-207, so I decided to use the year 2000 for county boundaries. I then used QGIS's `Random Points Inside Polygons` tool to generate 150 points that were randomly distributed inside every county in the United States. I exported these as `random-coordinates-150-per-county.csv`.
+In Step 1, I used the geospatial software QGIS to import a shapefile of US county boundaries for the year 2000 (from the Newberry Library's Atlas of Historical County Boundaries). The reason for selecting this year was that Helbock did not attempt to record historical counties for each post office, but rather recorded the county in which they were located when he was making his dataset. In this case, most of his work was published between 1998-2007, so I decided to use the year 2000 for county boundaries. I then used QGIS's `Random Points Inside Polygons` tool to generate 150 points that were randomly distributed inside every county in the United States. I exported these as `random-coordinates-150-per-county.csv`.
 
 Step 2 was completed through `assign-random-coordinates.R`. The basic process involved importing `us-post-offices.csv` and `random-coordinates-150-per-county.csv`, and then joining post office records that had not been geocoded through the GNIS matching to random points from the corresponding county that had been generated in QGIS (using the unique state and county combination as a key to join them).
 
-Read the [US Post Offices Data Biography](https://cblevins.github.io/us-post-offices/data-biography) for a discussion of the results and things to keep in mind when using this dataset.  
+### Credits
+
+- **Richard W. Helbock** (1938-2011) conducted the archival research to compile information about historical post offices. 
+- [**Cameron Blevins**](https://cameronblevins.org) processed Helbock's data into a spatial-historical dataset and made it available online.
+
+If you use the code in this repository, please cite: `Cameron Blevins, US Post Offices (2021), https://github.com/cblevins/us-post-offices.`
+
+If you use the resulting dataset, please cite the Harvard Dataverse record:
+
+<script src="https://dataverse.harvard.edu/resources/js/widgets.js?persistentId=doi:10.7910/DVN/NUKCNA&amp;dvUrl=https://dataverse.harvard.edu&amp;widget=citation&amp;heightPx=150"></script>
+
+For more information, contact [Cameron Blevins](mailto:cameron.blevins@ucdenver.edu).
