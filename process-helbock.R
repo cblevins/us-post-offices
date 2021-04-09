@@ -235,7 +235,7 @@ for(f in features){
 }
 #if you've found a match, it means the levenshtein distance score = 1 (a full match), so adding a column 
 po_matched<-po_matched %>%
-  mutate(GNIS.Dist=1) %>%
+  mutate(GNIS.MatchScore=1) %>%
   mutate(Continuous=as.logical(Continuous))
 toc(log=TRUE) #end timer and store to log
 endtime<-unlist(tic.log(format=TRUE)) #create character variable has the elapsed time
@@ -368,7 +368,7 @@ write(paste0("Matching data for Round 2 of geolocating Helbock data with GNIS da
 paste0("Percentage matched this round: ", nrow(po_matched_round2)/(nrow(helbock_data)-po_matched_round1)*100, "%")
 
 po_matched<-po_matched %>%
-  mutate(GNIS.Dist=1)
+  mutate(GNIS.MatchScore=1)
 
 ##write to a file = only use this when you're doing the full dataset, otherwise will overwrite ****
 write.csv(po_matched_round2, "analytics/round2.csv", row.names = F)
@@ -400,13 +400,13 @@ fuzzy_matchfun <- function(df1, df2, minmatch){
     #if (nrow(holder_df)>1) {print(holder_df)} #print if you are getting more than one match
     if (nrow(holder_df)>0) { #if you found at least one fuzzy match
       holder_df<-holder_df %>% 
-        mutate(GNIS.Dist=((name_length-distance)/name_length)) %>% #calculate the string distance as a percentage of the length ofhte post office string
+        mutate(GNIS.MatchScore=((name_length-distance)/name_length)) %>% #calculate the string distance as a percentage of the length ofhte post office string
         select(-c(distance, GNIS.OldName)) %>%
-        filter(GNIS.Dist >=minmatch) %>%
+        filter(GNIS.MatchScore >=minmatch) %>%
         filter(!((str_sub(Name, 1, 4)=="EAST" & str_sub(GNIS.Name, 1, 4)=="WEST") | (str_sub(Name, 1, 4)=="WEST" & str_sub(GNIS.Name, 1, 4)=="EAST"))) %>% #This is removing matches that are accidentally matching "East __" and "West __"
         filter(!(as.integer(str_length(Name))<=4 & (str_sub(Name, 1, 1)!=str_sub(GNIS.Name, 1, 1)))) %>% #remove any matches in which the length of the name is  4 letters or less AND it doesn't start with the same letter as the GNIS match - ex. "FERN" and "LERN"
         #only return the highest scoring match
-        arrange(desc(GNIS.Dist)) %>% #sort it descending by GNIS score and then alphabetically by Post Office Name
+        arrange(desc(GNIS.MatchScore)) %>% #sort it descending by GNIS score and then alphabetically by Post Office Name
         group_by(ID) %>% 
         filter(row_number()==1) %>% #take only the highest sorted one (one with highest GNIS score)
         ungroup() %>%
@@ -501,7 +501,7 @@ fulldata<-fulldata %>%
   mutate_all(trimws) %>%
   #mutate(Established=as.integer(Established), Discontinued=as.integer(Discontinued), ID=as.integer(ID))
   mutate_at(c("Established", "Discontinued", "ID", "GNIS.FEATURE_ID", "GNIS.ELEV_IN_M"), as.integer) %>%
-  mutate_at(c("GNIS.Latitude", "GNIS.Longitude", "GNIS.Dist"), as.numeric) %>%
+  mutate_at(c("GNIS.Latitude", "GNIS.Longitude", "GNIS.MatchScore"), as.numeric) %>%
   mutate_at(c("Continuous", "GNIS.Match"), as.logical)
 
 export_data<- fulldata %>%

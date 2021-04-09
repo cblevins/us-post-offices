@@ -59,7 +59,7 @@ postoffices_randomcoords<-postoffices %>%
   mutate(RandomCoordsFlag=ifelse(!is.na(RandomCoordsFlag.y), yes=RandomCoordsFlag.y, no=RandomCoordsFlag.x)) %>%
   mutate(Coordinates=ifelse(!is.na(Longitude), yes=TRUE, no=FALSE)) %>%
   #select(Post.Office:GNIS.Dist, Latitude, Longitude, RandomCoordsFlag, -(Latitude.x:RandomCoordsFlag.y))
-  select(Name:GNIS.Dist, Latitude, Longitude, RandomCoordsFlag, -(Latitude.x:RandomCoordsFlag.y))
+  select(Name:GNIS.MatchScore, Latitude, Longitude, RandomCoordsFlag, -(Latitude.x:RandomCoordsFlag.y))
   
 
 #output the file with random coordinates
