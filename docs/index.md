@@ -11,7 +11,7 @@ title: US Post Offices
 
 - Read the [data biography]({{site.baseurl}}/data-biography) detailing how the dataset was created and how it should be used.
 - Download the full dataset at [Harvard Dataverse](https://doi.org/10.7910/DVN/NUKCNA)
-- The code that was used to process and geocode the historical records can be found in the project's [Github repository](https://github.com/cblevins/post-offices).
+- The code that was used to process and geocode the historical records can be found in the project's [Github repository](https://github.com/cblevins/us-post-offices).
 - The following publications provide more information about the historical geography of the US postal system and make use of this dataset:
   - Cameron Blevins, *[Paper Trails: The US Post and the Making of the American West](https://global.oup.com/academic/product/paper-trails-9780190053673)* (New York: Oxford University Press, 2021).
   - Cameron Blevins, Yan Wu, and Steven Braun, ["Gossamer Network"](https://gossamernetwork.com/) (2021).
