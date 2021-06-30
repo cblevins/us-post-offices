@@ -26,3 +26,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "rubyzip", ">= 1.3.0"
+
+gem "kramdown", ">= 2.3.1"
